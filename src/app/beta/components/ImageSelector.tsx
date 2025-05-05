@@ -1,23 +1,31 @@
-import { Card, CardFooter, Button, CardBody } from "@heroui/react";
+'use client';
+import { Card, CardFooter, Button, CardBody, Image } from "@heroui/react";
 import ImagePlaceholder from "./ImagePlaceholder";
+import { useEditorViewModel } from "./EditorViewModel";
+import FileBowserButton from "./FileBrowserButton";
 
 export default function ImageSelector() {
+  const editor = useEditorViewModel();
+
   return (
-    <Card isFooterBlurred radius="lg">
+    <Card radius="lg" className="w-full">
       <CardBody className="overflow-visible py-2">
-        <div className="w-full aspect-square"><ImagePlaceholder blobCount={5} /></div>
+        <div className="w-full aspect-square flex flex-col justify-center">
+          {!editor.inputFile && <ImagePlaceholder blobCount={5} />}
+          {!!editor.inputFile && <Image src={URL.createObjectURL(editor.inputFile)} alt="Selected image" width="100%" />}
+        </div>
       </CardBody>
 
-      <CardFooter className="justify-between border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 shadow-small ml-1 z-10">
-        <p>Choose an image</p>
-        <Button
-          color="default"
-          radius="lg"
-          size="md"
-          variant="flat"
-        >
-          Browse
-        </Button>
+      <CardFooter className="absolute justify-center z-10 bottom-1">
+        {!editor.inputFile && <FileBowserButton onFileChanged={editor.setInputFile} label="Select image" />}
+        {editor.inputFile && (
+          <Button
+            variant="ghost"
+            color="primary"
+            onPress={() => editor.setInputFile(undefined)}>
+            Remove
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
