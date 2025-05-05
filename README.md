@@ -7,7 +7,6 @@ Client side only project imitating image aging by mocking reuploads.
 First, run the development server:
 
 ```bash
-# or
 pnpm dev
 ```
 
