@@ -1,5 +1,5 @@
 import { effectArray } from "@/effects";
-import { EditorViewModelProvider } from "./components/EditorViewModel";
+import { EditorViewModelProvider } from "./components/EditorViewModelProvider";
 import ImageSelector from "./components/ImageSelector";
 import LayerManager from "./components/LayerManager";
 

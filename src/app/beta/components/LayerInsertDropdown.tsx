@@ -1,21 +1,26 @@
 import { Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem } from "@heroui/react";
 
-export function LayerInsertDropdown() {
+interface LayerInsertDropdownProps {
+  items: {
+    key: string;
+    label: string;
+    shortcut?: string;
+  }[]
+  onInsert?: (key: string) => void;
+}
+
+export function LayerInsertDropdown({ items, onInsert }: LayerInsertDropdownProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
         <Button variant="bordered">Add layer</Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Dropdown menu with shortcut" variant="flat" color="secondary">
-        <DropdownItem key="new" shortcut="⌘N">
-          New file
-        </DropdownItem>
-        <DropdownItem key="copy" shortcut="⌘C">
-          Copy link
-        </DropdownItem>
-        <DropdownItem key="edit" shortcut="⌘⇧E">
-          Edit file
-        </DropdownItem>
+        {items.map((item) => (
+          <DropdownItem key={item.key} shortcut={item.shortcut} onPress={() => onInsert?.(item.key)}>
+            {item.label}
+          </DropdownItem>
+        ))}
       </DropdownMenu>
     </Dropdown>
   )
