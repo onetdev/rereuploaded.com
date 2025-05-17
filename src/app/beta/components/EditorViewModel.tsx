@@ -1,16 +1,25 @@
 'use client';
 
-import { LayerType } from "@/layers";
+import { EffectEditorRender, EffectType } from "@/effects";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
+export type LayerHistoryItem<T= unknown> = {
+  id: string;
+  type: EffectType;
+  options: T;
+  editor: EffectEditorRender<T>
+}
+
 interface EditorViewModelContextProps {
+  availableLayers: LayerHistoryItem[];
   inputFile?: File;
+  layers: LayerHistoryItem[];
   setInputFile: (file?: File) => void;
-  layers: LayerType[];
-  setLayers: (layers: LayerType[]) => void;
+  setLayers: (layers: LayerHistoryItem[]) => void;
 }
 
 const EditorViewModelContext = createContext<EditorViewModelContextProps>({
+  availableLayers: [],
   inputFile: undefined,
   layers: [],
   setInputFile: () => {
@@ -29,12 +38,16 @@ export const useEditorViewModel = () => {
   return context;
 }
 
-export const EditorViewModelProvider = ({ children }: PropsWithChildren) => {
+interface EditorViewModelProviderProps extends PropsWithChildren {
+  availableLayers: LayerHistoryItem[];
+}
+
+export const EditorViewModelProvider = ({ children, availableLayers }: EditorViewModelProviderProps) => {
   const [inputFile, setInputFile] = useState<File>();
-  const [layers, setLayers] = useState<LayerType[]>([]);
+  const [layers, setLayers] = useState<LayerHistoryItem[]>([]);
 
   return (
-    <EditorViewModelContext.Provider value={{ inputFile, setInputFile, layers, setLayers }}>
+    <EditorViewModelContext.Provider value={{ availableLayers, inputFile, layers, setInputFile, setLayers }}>
       {children}
     </EditorViewModelContext.Provider>
   );
