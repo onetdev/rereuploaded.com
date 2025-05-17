@@ -1,27 +1,25 @@
 'use client';
 
-import { createContext, PropsWithChildren, useContext, useState } from "react";
- 
-type NoiseLayer = {
-  type: "noise";
-  noiseType: "gaussian" | "perlin";
-  intensity: number;
+import { EffectItem, EffectType } from "@/effects";
+import { createContext, useContext } from "react";
+
+export type LayerHistoryItem<T= unknown> = {
+  id: string;
+  type: EffectType;
+  options: T;
 }
-type PerspectiveLayer = {
-  type: "perspective";
-  perspective: number;
-  intensity: number;
-}
-type LayerType = NoiseLayer | PerspectiveLayer
 
 interface EditorViewModelContextProps {
+  availableLayers: EffectItem<unknown>[];
   inputFile?: File;
+  layers: LayerHistoryItem[];
   setInputFile: (file?: File) => void;
-  layers: LayerType[];
-  setLayers: (layers: LayerType[]) => void;
+  setLayers: (layers: LayerHistoryItem[]) => void;
+  addLayer: (type: EffectType, options: unknown) => void;
 }
 
-const EditorViewModelContext = createContext<EditorViewModelContextProps>({
+export const EditorViewModelContext = createContext<EditorViewModelContextProps>({
+  availableLayers: [],
   inputFile: undefined,
   layers: [],
   setInputFile: () => {
@@ -29,6 +27,9 @@ const EditorViewModelContext = createContext<EditorViewModelContextProps>({
   },
   setLayers: () => {
     throw Error("setLayers not implemented");
+  },
+  addLayer: () => {
+    throw Error("addLayer not implemented");
   },
 });
 
@@ -38,15 +39,4 @@ export const useEditorViewModel = () => {
     throw new Error("useEditorViewModel must be used within an EditorViewModelProvider");
   }
   return context;
-}
-
-export const EditorViewModelProvider = ({ children }: PropsWithChildren) => {
-  const [inputFile, setInputFile] = useState<File>();
-  const [layers, setLayers] = useState<LayerType[]>([]);
-
-  return (
-    <EditorViewModelContext.Provider value={{ inputFile, setInputFile, layers, setLayers }}>
-      {children}
-    </EditorViewModelContext.Provider>
-  );
 }
