@@ -9,7 +9,7 @@ export default function ImageSelector() {
 
   return (
     <Card radius="lg" className="w-full">
-      <CardBody className="overflow-visible py-2">
+      <CardBody className="overflow-visible p-0">
         <div className="w-full aspect-square flex flex-col justify-center">
           {!editor.inputFile && <ImagePlaceholder blobCount={5} />}
           {!!editor.inputFile && <Image src={URL.createObjectURL(editor.inputFile)} alt="Selected image" width="100%" />}
@@ -20,7 +20,7 @@ export default function ImageSelector() {
         {!editor.inputFile && <FileBowserButton onFileChanged={editor.setInputFile} label="Select image" />}
         {editor.inputFile && (
           <Button
-            variant="ghost"
+            variant="faded"
             color="primary"
             onPress={() => editor.setInputFile(undefined)}>
             Remove
