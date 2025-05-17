@@ -5,7 +5,7 @@ export default function MainNav() {
     <Navbar shouldHideOnScroll isBordered maxWidth='full'>
       <NavbarBrand>
         <Link href="/" className="flex items-center gap-2" color="foreground">
-          <span className="font-bold text-inherit">RE:RE: Uploaded_</span>
+          <span className="font-bold text-inherit">RE:RE: Uploaded [<span title="Antic Impersonation">AI</span> Edition]</span>
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="end">
