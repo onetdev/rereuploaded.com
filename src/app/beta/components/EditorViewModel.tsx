@@ -1,6 +1,6 @@
 'use client';
 
-import { EffectEditorRender, EffectType } from "@/effects";
+import { EffectEditorRender, EffectItem, EffectType } from "@/effects";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 export type LayerHistoryItem<T= unknown> = {
@@ -11,7 +11,7 @@ export type LayerHistoryItem<T= unknown> = {
 }
 
 interface EditorViewModelContextProps {
-  availableLayers: LayerHistoryItem[];
+  availableLayers: EffectItem<unknown>[];
   inputFile?: File;
   layers: LayerHistoryItem[];
   setInputFile: (file?: File) => void;
@@ -39,7 +39,7 @@ export const useEditorViewModel = () => {
 }
 
 interface EditorViewModelProviderProps extends PropsWithChildren {
-  availableLayers: LayerHistoryItem[];
+  availableLayers: EffectItem<unknown>[];
 }
 
 export const EditorViewModelProvider = ({ children, availableLayers }: EditorViewModelProviderProps) => {

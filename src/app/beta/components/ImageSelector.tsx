@@ -13,7 +13,7 @@ export default function ImageSelector() {
         <div className="w-full aspect-square flex flex-col justify-center px-2">
           {!editor.inputFile && <ImagePlaceholder blobCount={5} />}
           {!!editor.inputFile && (<>
-            <Image src={URL.createObjectURL(editor.inputFile)} aria-hidden width="100%" className="rounded-none absolute blur-lg scale-200" />
+            <Image src={URL.createObjectURL(editor.inputFile)} aria-hidden width="100%" alt="" className="rounded-none absolute blur-lg scale-200" />
             <Image src={URL.createObjectURL(editor.inputFile)} alt="Selected image" width="100%" />
           </>)}
         </div>
