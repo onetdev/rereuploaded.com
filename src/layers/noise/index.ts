@@ -1,9 +1,2 @@
-export interface NoiseLayerOptions {
-  type: "gaussian" | "perlin";
-  intensity: number;
-}
-
-export interface NoiseLayer {
-  type: "noise";
-  options: NoiseLayerOptions;
-}
+export * from "./presets";
+export * from "./types";
