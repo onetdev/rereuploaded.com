@@ -4,6 +4,16 @@
   "private": true,
   "type": "module",
   "license": "MIT",
+  "author": "Konrad Koller <info@onet.dev> (https://onet.dev)",
+  "homepage": "https://rereuploaded.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onetdev/rereuploaded.com"
+  },
+  "bugs": {
+    "url": "https://github.com/onetdev/rereuploaded.com/issues",
+    "email": "info@rereuploaded.com"
+  },
   "scripts": {
     "check-types": "tsc --noEmit",
     "dev": "next dev",
@@ -35,5 +45,13 @@
     "lint-staged": "^15.5.1",
     "tailwindcss": "^4.1.5",
     "typescript": "^5"
-  }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://www.onet.dev/donate"
+  },
+  "packageManager": "pnpm@10.0.0"
 }
