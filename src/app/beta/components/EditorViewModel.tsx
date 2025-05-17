@@ -1,18 +1,7 @@
 'use client';
 
+import { LayerType } from "@/layers";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
- 
-type NoiseLayer = {
-  type: "noise";
-  noiseType: "gaussian" | "perlin";
-  intensity: number;
-}
-type PerspectiveLayer = {
-  type: "perspective";
-  perspective: number;
-  intensity: number;
-}
-type LayerType = NoiseLayer | PerspectiveLayer
 
 interface EditorViewModelContextProps {
   inputFile?: File;
